@@ -7,7 +7,7 @@ import nodeFsPr from 'fs/promises';
 
 const optDescr = 'password option value';
 
-const EX = async function parseAndLoadPswd(pswd) {
+const EX = async function retrievePassword(pswd) {
   mustBe('str', optDescr)(pswd);
   const sourceType = (/^(\w+):/.exec(pswd) || false)[1];
   const reader = getOwn(EX.readers, sourceType);
