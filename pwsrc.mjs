@@ -28,6 +28,8 @@ function invalidDirectSource() {
   throw new Error('This password source is not meant to be called directly!');
 }
 
+function splitLines(s) { return s.split(/[\r\n]+/); }
+
 
 const rd = {
   // Quick direct sources
@@ -40,8 +42,11 @@ const rd = {
 
   // Refining sources
   async base64(spec) { return unbase64(await EX(spec)); },
+  async firstLine(spec) { return splitLines(await EX(spec))[0]; },
   async json(spec) { return JSON.parse(await EX(spec)); },
+  async lastLine(spec) { return splitLines(await EX(spec)).slice(-1)[0]; },
   async trim(spec) { return stripBom(await EX(spec)).trim(); },
+  async uri(spec) { return decodeURIComponent(await EX(spec)); },
 };
 
 

@@ -1,5 +1,5 @@
 { "name": "config-password-source-pmb",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Read a password from the source specified in your config file.",
   "keywords": [],
 

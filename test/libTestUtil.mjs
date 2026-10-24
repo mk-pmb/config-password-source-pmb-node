@@ -16,6 +16,7 @@ const EX = {
   knownErrorMessages: {
     invalidSourceType: 'Invalid password source type given',
     noSourceType: 'No password source type given',
+    noSuchFile: 'no such file or directory',
     notNeSt: ' must be nonEmpty str ',
   },
 

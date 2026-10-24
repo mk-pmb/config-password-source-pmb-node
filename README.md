@@ -66,21 +66,30 @@ These source refine the text obtained from another source.
   Example: `json:utf8file:cfg.@local/secrets/database.json`
   or `json:env:STRINGIFIED_PASSWORD`
 
+* `firstLine`: Keep only the first line, without EOL if any (CR or NL or both).
+  Example: `firstLine:utf8file:cfg.@local/secrets/database.pswd`
+
 * `json`: JSON-decode the argument, which should be a JSON-encoded string.
   Useful to transport Unicode emoji through ASCII-only channels.
   Example: `json:utf8file:cfg.@local/secrets/database.json`
   or `json:env:STRINGIFIED_PASSWORD`
 
+* `lastLine`: Keep only the last line, without EOL if any (CR or NL or both).
+  Example: `lastLine:utf8file:cfg.@local/secrets/database.login.txt`
+
 * `trim`: Discard leading and trailing whitespace.
   Example: `trim:utf8file:cfg.@local/secrets/database.pswd`
+
+* `uri`: Decode `%xx` hex escapes as used in Uniform Resource Identifiers.
+  Example: `uri:verbatim:%F0%9F%94%91`
 
 
 
 Usage
 -----
 
-Search for `retrievePassword` in
-[`initPool.mjs` from `postgres-pool-pmb`][pgpool-init].
+See the [basic tests](test/basics.mjs) or search for `retrievePassword`
+in [`initPool.mjs` from `postgres-pool-pmb`][pgpool-init].
 
   [pgpool-init]: https://github.com/mk-pmb/postgres-pool-pmb-js/blob/master/src/initPool.mjs
 
