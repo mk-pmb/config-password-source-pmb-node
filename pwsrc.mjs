@@ -7,7 +7,9 @@ import nodeFsPr from 'fs/promises';
 
 const optDescr = 'password option value';
 
+function stripBom(s) { return (s.startsWith('\uFEFF') ? s.slice(1) : s); }
 function unbase64(s) { return Buffer.from(s, 'base64').toString('UTF-8'); }
+
 
 const EX = async function retrievePassword(spec) {
   mustBe('str', optDescr)(spec);
@@ -39,7 +41,7 @@ const rd = {
   // Refining sources
   async base64(spec) { return unbase64(await EX(spec)); },
   async json(spec) { return JSON.parse(await EX(spec)); },
-  async trim(spec) { return (await EX(spec)).trim(); },
+  async trim(spec) { return stripBom(await EX(spec)).trim(); },
 };
 
 
