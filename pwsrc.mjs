@@ -7,12 +7,12 @@ import nodeFsPr from 'fs/promises';
 
 const optDescr = 'password option value';
 
-const EX = async function retrievePassword(pswd) {
-  mustBe('str', optDescr)(pswd);
-  const sourceType = (/^(\w+):/.exec(pswd) || false)[1];
+const EX = async function retrievePassword(spec) {
+  mustBe('str', optDescr)(spec);
+  const sourceType = (/^(\w+):/.exec(spec) || false)[1];
   const reader = getOwn(EX.readers, sourceType);
-  if (!reader) { throw EX.errBadSourceType(sourceType, pswd.length); }
-  const details = pswd.slice(sourceType.length + 1);
+  if (!reader) { throw EX.errBadSourceType(sourceType, spec.length); }
+  const details = spec.slice(sourceType.length + 1);
   return reader(details);
 };
 
