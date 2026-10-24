@@ -1,5 +1,5 @@
 { "name": "config-password-source-pmb",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Read a password from the source specified in your config file.",
   "keywords": [],
 
@@ -17,7 +17,7 @@
   "private": false, "license": "ISC",
 
   "main": "pwsrc.mjs",
-  "scripts": { "test": "elp && nodemjs test/all.mjs" },
+  "scripts": { "test": "bash test/all.sh" },
   "directories": { "test": "test" },
   "eslintConfig": { "extends": "nodejs-pmb" },
 
@@ -30,7 +30,11 @@
     "eslint-plugin-json-light-pmb": "^1.0.7",
     "eslint-plugin-n": "^17.16.2",
     "eslint-pretty-pmb": "^1.0.7",
-    "nodemjs": "^0.1.18"
+    "nodemjs": "^0.1.18",
+    "p-tape": "^4.0.2",
+    "perish": "^1.0.3",
+    "rejected-or-not": "^2.0.0",
+    "usnam-pmb": "^0.2.5"
   },
 
 
