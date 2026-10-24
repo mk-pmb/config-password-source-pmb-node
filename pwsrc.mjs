@@ -18,10 +18,15 @@ const EX = async function retrievePassword(spec) {
 
 
 const rd = {
+  // Quick direct sources
+  env(varName) { return getOwn(process.env, varName); },
   verbatim: String,
+
+  // Async direct sources
   async utf8file(path) { return nodeFsPr.readFile(path, 'UTF-8'); },
+
+  // Refining sources
   async json(spec) { return JSON.parse(await EX(spec)); },
-  env(varName) { return String(getOwn(process.env, varName) || ''); },
 };
 
 
