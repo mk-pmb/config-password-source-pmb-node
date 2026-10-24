@@ -43,7 +43,7 @@ Supported source types
 
 * `utf8file`: The argument is the path to a UTF-8 encoded file from which
   to read the password. Will read the entire file, including any whitespace,
-  so save the file without trailing linefeed.
+  so you may want to use it with `trim`.
   Example: `utf8file:cfg.@local/secrets/database.pswd`
 
 * `verbatim`: The password is stored directly in the `spec`.
@@ -56,10 +56,18 @@ Supported source types
 
 These source refine the text obtained from another source.
 
+* `base64`: JSON-decode the argument, which should be a JSON-encoded string.
+  Useful to transport Unicode emoji through ASCII-only channels.
+  Example: `json:utf8file:cfg.@local/secrets/database.json`
+  or `json:env:STRINGIFIED_PASSWORD`
+
 * `json`: JSON-decode the argument, which should be a JSON-encoded string.
   Useful to transport Unicode emoji through ASCII-only channels.
   Example: `json:utf8file:cfg.@local/secrets/database.json`
   or `json:env:STRINGIFIED_PASSWORD`
+
+* `trim`: Discard leading and trailing whitespace.
+  Example: `trim:utf8file:cfg.@local/secrets/database.pswd`
 
 
 

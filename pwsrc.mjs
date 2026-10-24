@@ -7,13 +7,16 @@ import nodeFsPr from 'fs/promises';
 
 const optDescr = 'password option value';
 
+function unbase64(s) { return Buffer.from(s, 'base64').toString('UTF-8'); }
+
 const EX = async function retrievePassword(spec) {
   mustBe('str', optDescr)(spec);
   const sourceType = (/^(\w+):/.exec(spec) || false)[1];
   const reader = getOwn(EX.readers, sourceType);
   if (!reader) { throw EX.errBadSourceType(sourceType, spec.length); }
   const details = spec.slice(sourceType.length + 1);
-  return reader(details);
+  const pwsd = await reader(details);
+  return pwsd;
 };
 
 
@@ -26,7 +29,9 @@ const rd = {
   async utf8file(path) { return nodeFsPr.readFile(path, 'UTF-8'); },
 
   // Refining sources
+  async base64(spec) { return unbase64(await EX(spec)); },
   async json(spec) { return JSON.parse(await EX(spec)); },
+  async trim(spec) { return (await EX(spec)).trim(); },
 };
 
 
