@@ -27,12 +27,17 @@ This module exports one function:
 
 `spec` is a string that defines where to find the actual password.
 It starts with the source type name, then a colon, then the argument(s).
+The colon is mandatory even without arguments.
 
 
 Supported source types
 ----------------------
 
 ### Direct sources
+
+* `empty`: Will always return the empty string, and it is the only source that
+  is allowed to yield an empty password.
+  Example: `empty:`
 
 * `env`: The argument is the name of the environment variable that holds the
   password. Note that on most operating systems, environment variables can be

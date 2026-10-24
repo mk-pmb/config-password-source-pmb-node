@@ -12,16 +12,24 @@ function unbase64(s) { return Buffer.from(s, 'base64').toString('UTF-8'); }
 const EX = async function retrievePassword(spec) {
   mustBe('str', optDescr)(spec);
   const sourceType = (/^(\w+):/.exec(spec) || false)[1];
+  if (sourceType === 'empty') { return ''; }
   const reader = getOwn(EX.readers, sourceType);
   if (!reader) { throw EX.errBadSourceType(sourceType, spec.length); }
   const details = spec.slice(sourceType.length + 1);
   const pwsd = await reader(details);
+  mustBe.nest('Raw password retrieved from source type ' + sourceType, pwsd);
   return pwsd;
 };
 
 
+function invalidDirectSource() {
+  throw new Error('This password source is not meant to be called directly!');
+}
+
+
 const rd = {
   // Quick direct sources
+  empty: invalidDirectSource,
   env(varName) { return getOwn(process.env, varName); },
   verbatim: String,
 
